@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: stream-turbine
+server:
+  port: 11001
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/
+turbine:
+  appConfig: stream-api,stream-open-api
+  clusterNameExpression: new String("default")
+  aggregator:
+    clusterConfig: default
