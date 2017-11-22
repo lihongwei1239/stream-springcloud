@@ -8,7 +8,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:${server.port}/eureka/
 turbine:
-  appConfig: stream-api,stream-open-api
-  clusterNameExpression: new String("default")
   aggregator:
     clusterConfig: default
+  appConfig: stream-api,stream-open-api
+  clusterNameExpression: new String("default")

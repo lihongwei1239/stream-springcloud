@@ -5,15 +5,23 @@ user:
 spring:
   application:
     name: stream-open-api
+
+logging:
+  level:
+    root: INFO
+    com.itmuch: DEBUG
+
 eureka:
   client:
     healthcheck:
       enabled: true
-    serviceUrl:
+    service-url:
       defaultZone: http://user:password123@localhost:8761/eureka,http://user:password123@localhost:8762/eureka,http://user:password123@localhost:8763/eureka
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 5
+
 feign:
   hystrix:
     enabled: true

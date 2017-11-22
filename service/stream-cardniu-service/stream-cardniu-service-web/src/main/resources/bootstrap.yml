@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    bus:
+      trace:
+        enabled: true
+    config:
+      discovery:
+        enabled: true
+        service-id: stream-config-server
+  rabbitmq:
+    host: 192.168.1.200
+    port: 5672
+    username: hxb
+    password: hxb
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+  application:
+    name: stream-cardniu-service-web
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka,http://user:password123@localhost:8762/eureka,http://user:password123@localhost:8763/eureka

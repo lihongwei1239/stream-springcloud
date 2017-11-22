@@ -1,17 +1,6 @@
 server:
-  port: 7901
-spring:
-  jpa:
-    generate-ddl: false
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-  datasource:
-    platform: h2
-    schema: classpath:schema.sql
-    data: classpath:data.sql
-  application:
-    name: stream-cardniu-service-web
+  port: 7902
+
 logging:
   level:
     root: INFO
@@ -19,12 +8,13 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
     com.itmuch: DEBUG
+
 eureka:
   client:
     healthcheck:
       enabled: true
     service-url:
-      defaultZone: http://user:password123@localhost:8761/eureka
+      defaultZone: http://user:password123@localhost:8761/eureka,http://user:password123@localhost:8762/eureka,http://user:password123@localhost:8763/eureka
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}

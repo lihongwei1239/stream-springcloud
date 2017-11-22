@@ -1,35 +1,39 @@
 server:
-  port: 9000
-user:
-  userServicePath: http://localhost:7900/simple/
-spring:
-  application:
-    name: stream-api
+  port: 12001
 
-logging:
-  level:
-    root: INFO
-    com.itmuch: DEBUG
+spring:
+
+  application:
+    name: stream-config-server
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/lihongwei1238/config-repo-51cto-video
+          username:
+          password:
+
+    bus:
+      trace:
+        enabled: true
+
+  rabbitmq:
+    host: 192.168.1.200
+    port: 5672
+    username: hxb
+    password: hxb
 
 eureka:
+
   client:
     healthcheck:
       enabled: true
     service-url:
       defaultZone: http://user:password123@localhost:8761/eureka,http://user:password123@localhost:8762/eureka,http://user:password123@localhost:8763/eureka
+
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
     lease-renewal-interval-in-seconds: 5
 
-feign:
-  hystrix:
-    enabled: true
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 5000

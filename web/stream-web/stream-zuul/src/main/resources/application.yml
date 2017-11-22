@@ -1,10 +1,9 @@
 server:
-  port: 9000
-user:
-  userServicePath: http://localhost:7900/simple/
+  port: 10000
+
 spring:
   application:
-    name: stream-api
+    name: stream-zuul
 
 logging:
   level:
@@ -22,14 +21,12 @@ eureka:
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
     lease-renewal-interval-in-seconds: 5
 
-feign:
-  hystrix:
-    enabled: true
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 5000
+zuul:
+  prefix: /zuul
+  routes:
+    stream-api:
+       path: /api/**
+       serviceId: stream-api
+    stream-open-api:
+       path: /openapi/**
+       serviceId: stream-open-api
